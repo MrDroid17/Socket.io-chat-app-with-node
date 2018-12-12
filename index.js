@@ -1,9 +1,16 @@
 const express = require('express');
+const socket = require('socket.io');
 
 let app = express();
-app.listen('4000', () => {
+let server = app.listen('4000', () => {
     console.log('Server is running just fine at port 4000');
 })
 
 // static files
 app.use(express.static('public'))
+
+// Socket connection
+let io = socket(server);
+io.on('connection', (socket) => {
+    console.log('connected to socket at http://localhost:4000 with id ', socket.id);
+})
