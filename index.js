@@ -13,4 +13,11 @@ app.use(express.static('public'))
 let io = socket(server);
 io.on('connection', (socket) => {
     console.log('connected to socket at http://localhost:4000 with id ', socket.id);
+    /**
+     * get emitted data 
+     */
+
+    socket.on('chat', (data) => {
+        io.sockets.emit('chat', data);
+    })
 })
